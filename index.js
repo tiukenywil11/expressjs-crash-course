@@ -1,7 +1,6 @@
 const express = require('express');
 // path is a dependency of node, which gets device's path
 const path = require('path');
-const moment = require('moment');
 const members = require('./Members');
 const logger = require('./middleware/logger')
 
