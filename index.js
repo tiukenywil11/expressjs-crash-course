@@ -1,29 +1,22 @@
 const express = require('express');
-const app = express();
 // path is a dependency of node, which gets device's path
 const path = require('path');
+const members = require('./Members');
 
-// Creating members array to serve as sample JSON data
-const members = [
-    {
-        id: 1,
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        status: 'active'
-    },
-    {
-        id: 2,
-        name: 'Bob Williams',
-        email: 'bob@gmail.com',
-        status: 'inactive'
-    },
-    {
-        id: 3,
-        name: 'Shannon Jackson',
-        email: 'shannon@gmail.com',
-        status: 'active'
-    }
-];
+const app = express();
+
+// Create a middleware called logger, takes 3 parameters response, request, and next (call next last, to be able to call the next middleware)
+const logger = (req, res, next) => {
+    
+    // console.log('Hello');
+
+    // Get the url being accessed
+    console.log(`${req.protocol}://${req.get('host')}${req.originalUrl}`)
+    next();
+}
+
+// Initialize middleware, everytime a request is ran, the middleware runs as well
+app.use(logger);
 
 /*
 -- This was commented out, and replaced by static directory
