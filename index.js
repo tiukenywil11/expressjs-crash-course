@@ -3,6 +3,28 @@ const app = express();
 // path is a dependency of node, which gets device's path
 const path = require('path');
 
+// Creating members array to serve as sample JSON data
+const members = [
+    {
+        id: 1,
+        name: 'John Doe',
+        email: 'john@gmail.com',
+        status: 'active'
+    },
+    {
+        id: 2,
+        name: 'Bob Williams',
+        email: 'bob@gmail.com',
+        status: 'inactive'
+    },
+    {
+        id: 3,
+        name: 'Shannon Jackson',
+        email: 'shannon@gmail.com',
+        status: 'active'
+    }
+];
+
 /*
 -- This was commented out, and replaced by static directory
 -- Create an endpoint for the main page
@@ -13,6 +35,14 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 */
+
+// Create a RESTful API endpoint
+app.get('/api/members', (req, res) => {
+    
+    // Parses members from javascript object to json format
+    res.json(members);
+
+})
 
 // Set a static folder, set 'public' as default directory used
 app.use(express.static(path.join(__dirname, 'public')));
