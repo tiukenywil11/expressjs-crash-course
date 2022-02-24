@@ -20,12 +20,24 @@ app.get('/', (req, res) => {
 });
 */
 
-// Create a RESTful API endpoint
+// Create a RESTful API endpoint to get a full array
 app.get('/api/members', (req, res) => {
     
     // Parses members from javascript object to json format
     res.json(members);
 
+})
+
+// Create a RESTful API endpoint to get a single element
+app.get('/api/members/:id', (req, res) => {
+
+    // Sends a request to get values based in id (req.params = returns for a string format)
+    // res.send(req.params.id);
+
+    // Parses members from javascript object to json format
+    res.json(members.filter(member => 
+        member.id === parseInt(req.params.id)
+    ));
 })
 
 // Set a static folder, set 'public' as default directory used
