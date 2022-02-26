@@ -91,4 +91,25 @@ router.put('/:id', (req, res) => {
     }
 });
 
+
+// Create a RESTful API endpoint to delete a single element
+router.delete('/:id', (req, res) => {
+
+    // Create a variable that checks if id already exists in list
+    const found = members.some(member => member.id === parseInt(req.params.id));
+
+    // Create a conditional to check if id exists
+    if (found) {
+        res.json({
+            msg: 'Member deleted',
+            // Assign filtered array to members variable
+            members: members.filter( member => member.id !== parseInt(req.params.id))
+        })
+    } else {
+        res.status(400).json({ msg : `No member with the id of ${req.params.id}`})
+    }
+
+});
+
+
 module.exports = router;
