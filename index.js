@@ -9,6 +9,8 @@ const members = require('./Members');
 
 const { allowedNodeEnvironmentFlags } = require('process');
 
+// import passport.js (passport-local for dev server) for authentication
+
 const app = express();
 
 // Initialize middleware, everytime a request is ran, the middleware runs as well

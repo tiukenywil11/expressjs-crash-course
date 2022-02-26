@@ -2,6 +2,26 @@
     {{title}}
 </h1>
 
+<!-- Creating a form to server side home page -->
+<form action="/api/members" method="POST" class="mb-4">
+
+    <div class="form-group">
+        <!-- name attribute (name) would be sent to the api request -->
+        <label for="name"> Name </label>
+        <input type="text" name="name" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <!-- name attribute (email) would be sent to the api request -->
+        <label for="email"> Email </label>
+        <input type="text" name="email" class="form-control"/>
+    </div>
+
+    <input type="submit" value="Add Member" class="btn btn-primary col-12 mt-3"/>
+
+</form>
+
+<!-- label for list -->
 <h4> Members </h4>
 
 <!-- 'members' comes from index.js -->
@@ -10,3 +30,6 @@
     <li class="list-group-item"> {{this.name}}: {{this.email}} </li>
     {{/each}}
 </ul>
+
+<!-- Redirects to the API -->
+<a href="/api/members" class="btn btn-light mt-4"> Visit API </a>

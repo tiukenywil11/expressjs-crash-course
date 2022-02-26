@@ -59,6 +59,10 @@ router.post('/', (req, res) => {
     // Returns a json formatted array of new array
     res.json(members);
 
+    /*
+    -- This is used for templates "server side UI"
+    res.redirect('/');
+    */
 });
 
 
