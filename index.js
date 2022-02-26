@@ -1,7 +1,6 @@
 const express = require('express');
 // path is a dependency of node, which gets device's path
 const path = require('path');
-const members = require('./Members');
 const logger = require('./middleware/logger')
 
 const app = express();
@@ -20,7 +19,9 @@ app.get('/', (req, res) => {
 });
 */
 
-// Create a RESTful API endpoint to get a full array
+/*
+This was transferred to routes/api/members.js
+-- Create a RESTful API endpoint to get a full array
 app.get('/api/members', (req, res) => {
     
     // Parses members from javascript object to json format
@@ -28,7 +29,7 @@ app.get('/api/members', (req, res) => {
 
 })
 
-// Create a RESTful API endpoint to get a single element
+-- Create a RESTful API endpoint to get a single element
 app.get('/api/members/:id', (req, res) => {
 
     // Sends a request to get values based in id (req.params = returns for a string format)
@@ -50,9 +51,13 @@ app.get('/api/members/:id', (req, res) => {
         )
     }
 })
+*/
 
 // Set a static folder, set 'public' as default directory used
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Call api, assigning url /api/members to the file from /routes/api/members
+app.use('/api/members', require('./routes/api/members'))
 
 // Get port from environment variable, or on port 5000
 const PORT = process.env.PORT || 5000;
