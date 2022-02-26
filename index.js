@@ -1,7 +1,10 @@
 const express = require('express');
 // path is a dependency of node, which gets device's path
 const path = require('path');
-const logger = require('./middleware/logger')
+// express-handlebars helps express implement views
+const { engine } = require ('express-handlebars')
+const logger = require('./middleware/logger');
+const { allowedNodeEnvironmentFlags } = require('process');
 
 const app = express();
 
@@ -53,12 +56,24 @@ app.get('/api/members/:id', (req, res) => {
 })
 */
 
+// Create a middleware for express-handlebars (from express-handlebars documentation)
+// Sets engine to 'handlebars' name
+app.engine('handlebars', engine());
+// Sets view engine to a varisble name called handlebars
+app.set('view engine', 'handlebars');
+// Sets folder to 'views' folder
+app.set('views','./views')
+
+// Create a route for the handlebars home page (This overwrites static homepage, because it is called first)
+// #static-home-page, and view handlers are never used at the same time
+app.get('/', (req, res) => res.render('index'));
+
 // Create a new middleware that parses body of post requests, handles raw json
 app.use(express.json());
 // This middleware handles form submissions
 app.use(express.urlencoded({extended: false}));
 
-// Set a static folder, set 'public' as default directory used
+// #static-home-page: Set a static folder, set 'public' as default directory used
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Call api, assigning url /api/members to the file from /routes/api/members
