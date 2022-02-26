@@ -36,4 +36,10 @@ router.get('/:id', (req, res) => {
     }
 })
 
+// Create a RESTful API endpoint to post (create) a new element
+router.post('/', (req, res) => {
+    res.send(req.body);
+});
+
+
 module.exports = router;

@@ -53,6 +53,11 @@ app.get('/api/members/:id', (req, res) => {
 })
 */
 
+// Create a new middleware that parses body of post requests, handles raw json
+app.use(express.json());
+// This middleware handles form submissions
+app.use(express.urlencoded({extended: false}));
+
 // Set a static folder, set 'public' as default directory used
 app.use(express.static(path.join(__dirname, 'public')));
 
