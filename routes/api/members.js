@@ -62,4 +62,33 @@ router.post('/', (req, res) => {
 });
 
 
+// Create a RESTful API endpoint to put (update) an existing element
+router.put('/:id', (req, res) => {
+
+    // Create a variable that checks if id already exists in list
+    const found = members.some(member => member.id === parseInt(req.params.id));
+
+    // Create a conditional to check if id exists
+    if (found) {
+        // Assigns req.body to a temporary variable, so it can be appended
+        const updMember = req.body;
+        members.forEach(member => {
+            
+            // If member id is the same as from the request, assign the parameters to the variables
+            if(member.id === parseInt(req.params.id)) {
+
+                // Used ternary operator if input is included, else keep the old value
+                member.name = updMember.name ? updMember.name : member.name;
+                member.email = updMember.email ? updMember.email : member.email;
+
+                // Return a response indicating success, and the member updated
+                res.json({ msg: 'Member updated', member });
+            }
+        
+        });
+    } else {
+        res.status(400).json({ msg : `No member with the id of ${req.params.id}`})
+    }
+});
+
 module.exports = router;
