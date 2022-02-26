@@ -1,4 +1,5 @@
 const express = require('express');
+const uuid = require('uuid');
 // Gets the Router function from express framework, to use on api functions
 const router = express.Router();
 const members = require('../../Members');
@@ -38,7 +39,26 @@ router.get('/:id', (req, res) => {
 
 // Create a RESTful API endpoint to post (create) a new element
 router.post('/', (req, res) => {
-    res.send(req.body);
+    //res.send(req.body);
+
+    // Put request return into a variable
+    const newMember = {
+        id: uuid.v4(),
+        name: req.body.name,
+        email: req.body.email,
+        status: 'active'
+    }
+
+    // Sends eror message when name or email fields are blank
+    if(!newMember.name || !newMember.email) {
+        res.status(400).json({ msg: 'Please include a name and email' });
+    }
+    
+    // Push new member to members array
+    members.push(newMember);
+    // Returns a json formatted array of new array
+    res.json(members);
+
 });
 
 
