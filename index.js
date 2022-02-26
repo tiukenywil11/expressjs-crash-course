@@ -2,8 +2,11 @@ const express = require('express');
 // path is a dependency of node, which gets device's path
 const path = require('path');
 // express-handlebars helps express implement views
-const { engine } = require ('express-handlebars')
+const { engine } = require ('express-handlebars');
 const logger = require('./middleware/logger');
+
+const members = require('./Members');
+
 const { allowedNodeEnvironmentFlags } = require('process');
 
 const app = express();
@@ -66,7 +69,11 @@ app.set('views','./views')
 
 // Create a route for the handlebars home page (This overwrites static homepage, because it is called first)
 // #static-home-page, and view handlers are never used at the same time
-app.get('/', (req, res) => res.render('index'));
+// Second parameter inside render are variables passed from index.js
+app.get('/', (req, res) => res.render('index', {
+    title: 'Member App',
+    members
+}));
 
 // Create a new middleware that parses body of post requests, handles raw json
 app.use(express.json());
