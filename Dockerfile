@@ -18,5 +18,5 @@ COPY . .
 EXPOSE 5000
 CMD [ "npm", "start" ]
 
-# docker build . -t tiukenywil11/express-crash-course
-# docker run -p 5000:5000 -d tiukenywil11/express-crash-course
+# docker build . -t tiukenywil11/expressjs-crash-course
+# docker run -p 5000:5000 -d tiukenywil11/expressjs-crash-course
